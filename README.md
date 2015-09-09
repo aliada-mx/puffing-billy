@@ -1,4 +1,4 @@
-# Puffing Billy
+ Puffing Billy
 
 A rewriting web proxy for testing interactions between your browser and
 external sites. Works with ruby + rspec.
@@ -29,6 +29,20 @@ end
 
 You can also record HTTP interactions and replay them later. See
 [caching](#caching) below.
+
+## In this fork
+
+Added the ability to reuse automatically cached yaml files with regexes.
+Example:
+
+    proxy.stub(/.*api.conekta.io:?\d*\/tokens.*/, method: :post).and_return(yml: 'post_api.conekta.io_fc98057bf8ca84ce73648e0a353aac11e221de2d_1e8a91736f8f6825f92542104e905b99abb0873c.yml')
+
+Puffing billy automatically created that yml, but it can't reuse it because 
+the url is dynamic, with this addition we explicitly tell puffing billy
+to use that file
+
+### TODO
+Testing
 
 ## Installation
 

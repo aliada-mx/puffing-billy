@@ -42,6 +42,11 @@ module Billy
       elsif res[:text]
         headers = { 'Content-Type' => 'text/plain' }.merge(headers)
         body = res[:text]
+      elsif res[:yml]
+        file_path = File.join(Billy.config.cache_path, "#{res[:yml]}")
+        yml = YAML.load_file file_path
+        headers = yml[:headers]
+        body = yml[:content]
       elsif res[:redirect_to]
         code = 302
         headers = { 'Location' => res[:redirect_to] }
